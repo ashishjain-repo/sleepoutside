@@ -10,6 +10,14 @@ function addProductToCart(product) {
 async function addToCartHandler(e) {
   const product = await findProductById(e.target.dataset.id);
   addProductToCart(product);
+  triggerAnimation();
+}
+
+function triggerAnimation() {
+  document.querySelector('.cart').classList.toggle('activated');
+  setTimeout(() => {
+    document.querySelector('.cart').classList.toggle('activated');
+  },500)
 }
 
 // add listener to Add to Cart button

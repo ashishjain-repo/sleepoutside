@@ -96,6 +96,23 @@ button {
 }
 /* End utility classes */
 
+@keyframes wiggle {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 15deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+.cart.activated {
+  animation-name: wiggle;
+  animation-duration: .5s;
+}
+
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
