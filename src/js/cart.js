@@ -24,5 +24,18 @@ function cartItemTemplate(item) {
 
   return newItem;
 }
+function cartTotal(){
+  let total = 0;
+  const cart =  document.getElementsByClassName('cart-total')[0];
+  try{
+    const cartItems = getLocalStorage('so-cart');
+    // cartItems.reduce((item) => total += item.FinalPrice);
+    total = cartItems.reduce((total, item) => total + item.FinalPrice, 0);
+    cart.append(`${total}`);
+    document.getElementsByClassName('cart-footer')[0].classList.remove('hide');
+  }
+  catch(error){}
+}
+cartTotal();
 
 renderCartContents();
