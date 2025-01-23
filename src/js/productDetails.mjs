@@ -25,4 +25,12 @@ function addProductToCart(product) {
   const products = getLocalStorage('so-cart');
   if (products) setLocalStorage('so-cart', [...products, product]);
   else setLocalStorage('so-cart', [product]);
+  triggerAnimation();
+}
+
+function triggerAnimation() {
+  document.querySelector('.cart').classList.toggle('activated');
+  setTimeout(() => {
+    document.querySelector('.cart').classList.toggle('activated');
+  },500)
 }
