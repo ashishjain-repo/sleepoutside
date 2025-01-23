@@ -1,6 +1,16 @@
-export default function productDetails(productId, selector) {}
+import { findProductById } from './productData.mjs';
+import {getLocalStorage, setLocalStorage} from './utils.mjs';
+
+export default async function productDetails(productId, selector) {
+  const product = await findProductById(productId);
+  const html = productDetailsTemplate(product)
+  document.querySelector(selector).innerHTML = html;
+  // The Add Cart Button needs an event listener
+  document.getElementById('addToCart').addEventListener('click',() => addProductToCart(product));
+}
+
 function productDetailsTemplate(product) {
-  const html = `<h3 id="productName">${product.Name}</h3>
+  return `<h3 id="productName">${product.Name}</h3>
   <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
   <img id="productImage" class="divider" src="${product.Image}" alt="" />
   <p class="product-card__price" id="productFinalPrice">${product.FinalPrice}</p>
@@ -12,7 +22,7 @@ function productDetailsTemplate(product) {
 }
 
 function addProductToCart(product) {
-  const products = getLocalStorage("so-cart");
-  if (products) setLocalStorage("so-cart", [...products, product]);
-  else setLocalStorage("so-cart", [product]);
+  const products = getLocalStorage('so-cart');
+  if (products) setLocalStorage('so-cart', [...products, product]);
+  else setLocalStorage('so-cart', [product]);
 }
