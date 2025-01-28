@@ -108,9 +108,32 @@ button {
   }
 }
 
+.cart .badge {
+  position: absolute;
+  padding: 0 5px;
+
+  margin-top: -35px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  transform: translate(50%, -50%); /* Center it nicely */
+}
+/* #lblCartCount {
+  font-size: 12px;
+  background: #ff0000;
+  color: #fff;
+} */
+
 .cart.activated {
   animation-name: wiggle;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
 }
 
 /* Cart icon styles */
@@ -219,8 +242,8 @@ button {
   grid-column: 3;
 }
 
-.hide{
-  display:none;
+.hide {
+  display: none;
 }
 
 @media screen and (min-width: 500px) {
