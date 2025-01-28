@@ -5,6 +5,7 @@ function updateCartBadge() {
   const cartItems = getLocalStorage("so-cart") || [];
   const totalItems = cartItems.length;
   const badge = document.querySelector(".cart .badge");
+  console.log(badge);
 
   if (badge) {
     if (totalItems > 0) {
