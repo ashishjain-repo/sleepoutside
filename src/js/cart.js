@@ -100,6 +100,22 @@ function updateCartBadge() {
   }
 }
 
+function addItemDiscount(){
+  const itemPrice = document.querySelectorAll(".cart-card");
+  try{
+    let index = 0;
+    const cartItems = getLocalStorage("so-cart") || [];
+    cartItems.forEach(element => {
+      let discount = (((element['SuggestedRetailPrice'] - element['FinalPrice']) / element['SuggestedRetailPrice'])*100).toFixed(2)
+      itemPrice[index].innerHTML+=`<b>${discount}% Off</b>`
+      index++
+    });
+  }
+    catch(error){
+      console.log("Cannot do it");;
+    }
+  }
+
 // Run the updateCartBadge function after the DOM has loaded
 document.addEventListener("DOMContentLoaded", () => {
   updateCartBadge();
@@ -108,3 +124,4 @@ document.addEventListener("DOMContentLoaded", () => {
 // Initial calls to render cart contents and total
 cartTotal();
 renderCartContents();
+addItemDiscount();
