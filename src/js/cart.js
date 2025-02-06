@@ -103,12 +103,10 @@ function updateCartBadge() {
 function addItemDiscount(){
   const itemPrice = document.querySelectorAll(".cart-card");
   try{
-    let index = 0;
     const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.forEach(element => {
+    cartItems.forEach((element, index) => {
       let discount = (((element['SuggestedRetailPrice'] - element['FinalPrice']) / element['SuggestedRetailPrice'])*100).toFixed(2)
       itemPrice[index].innerHTML+=`<b>${discount}% Off</b>`
-      index++
     });
   }
     catch(error){
