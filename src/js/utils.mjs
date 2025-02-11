@@ -28,3 +28,9 @@ export function getParam(param) {
   const product = urlParams.get(param);
   return product;
 }
+
+export function getProductDiscount(product) {
+      return ((
+        (product['SuggestedRetailPrice'] - product['FinalPrice']) / product['SuggestedRetailPrice']) * 100)
+        .toFixed(0)
+}
