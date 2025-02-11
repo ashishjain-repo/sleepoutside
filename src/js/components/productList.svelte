@@ -17,7 +17,6 @@
             {console.log(product.Id)}
             {#if productIds.includes(product.Id)}
                 <ProductSummary {product}/>
-                
             {/if}
         {/each}
     </ul>
