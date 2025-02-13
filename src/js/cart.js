@@ -1,5 +1,5 @@
 import { getLocalStorage, getProductDiscount } from "./utils.mjs";
-
+import { renderHeaderFooter } from "./utils.mjs";
 // Function to render cart contents
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; // Ensure we handle empty cart gracefully
@@ -81,3 +81,4 @@ document.addEventListener("DOMContentLoaded", () => {
 cartTotal();
 renderCartContents();
 addItemDiscount();
+renderHeaderFooter();
