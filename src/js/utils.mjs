@@ -32,6 +32,11 @@ export function getParam(param) {
   return product;
 }
 
+export function getProductDiscount(product) {
+      return ((
+        (product['SuggestedRetailPrice'] - product['FinalPrice']) / product['SuggestedRetailPrice']) * 100)
+        .toFixed(0)
+}
 export function renderHeaderFooter() {
   mount(MainFooter,{
     target: document.querySelector('#footer'),

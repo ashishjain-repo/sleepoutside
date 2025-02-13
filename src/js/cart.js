@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, getProductDiscount } from "./utils.mjs";
 import { renderHeaderFooter } from "./utils.mjs";
 // Function to render cart contents
 function renderCartContents() {
@@ -63,7 +63,7 @@ function addItemDiscount(){
   try{
     const cartItems = getLocalStorage("so-cart") || [];
     cartItems.forEach((element, index) => {
-      let discount = (((element['SuggestedRetailPrice'] - element['FinalPrice']) / element['SuggestedRetailPrice'])*100).toFixed(2)
+      let discount = getProductDiscount(element);
       itemPrice[index].innerHTML+=`<b>${discount}% Off</b>`
     });
   }
