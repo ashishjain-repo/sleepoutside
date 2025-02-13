@@ -1,9 +1,11 @@
 <script>
+    import {getProductDiscount} from "../utils.mjs";
     let {product} = $props();
 </script>
 
 <li class="product-card">
     <a href="product_pages/index.html?product={product.Id}">
+        <p class="discount-text">-{getProductDiscount(product)}%</p>
         <img
             src={product.Image}
             alt={product.Name}/>

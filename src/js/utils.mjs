@@ -1,3 +1,6 @@
+import { mount } from "svelte";
+import MainHeader from './components/MainHeader.svelte';
+import MainFooter from './components/MainFooter.svelte';
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -27,4 +30,25 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
   return product;
+}
+
+export function getProductDiscount(product) {
+      return ((
+        (product['SuggestedRetailPrice'] - product['FinalPrice']) / product['SuggestedRetailPrice']) * 100)
+        .toFixed(0)
+}
+export function renderHeaderFooter() {
+  mount(MainFooter,{
+    target: document.querySelector('#footer'),
+  })
+    mount(MainHeader,{
+      target: document.querySelector('#header'),
+    })
+}
+
+// Function to update the cart badge with the number of items
+export function getCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const totalItems = cartItems.length;
+  return totalItems;
 }
