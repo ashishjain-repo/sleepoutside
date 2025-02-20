@@ -1,6 +1,6 @@
 :root {
   --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-headline: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -268,4 +268,23 @@ footer {
 .discount-text {
   font-weight: bold;
   text-align: end;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5em;
+  list-style-type: none;
+  flex-direction: row;
+}
+
+img {
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+p {
+  text-align: center;
 }
