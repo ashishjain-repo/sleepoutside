@@ -17,6 +17,13 @@ function init(){
     total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
 };
 
+function packageItems(items){
+
+}
+function handleSubmit(e){
+    e.preventDefault();
+}
+
 onMount(init)
 </script>
 
