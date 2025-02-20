@@ -1,5 +1,9 @@
 <script>
-    let {category} = $props();
+    let {category, count} = $props();
 </script>
 
-<p>{category}</p>
+{#if count}
+    <p>{category}->({count} items)</p>
+{:else}
+    <p>{category}</p>
+{/if}
