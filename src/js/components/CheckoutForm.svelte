@@ -1,6 +1,7 @@
 <script>
-  import { mount, onMount } from 'svelte';
-import {getLocalStorage} from '../utils.mjs';
+  import { onMount } from 'svelte';
+  import {getLocalStorage} from '../utils.mjs';
+  import {checkout} from '../externalServices.mjs';
   let tax = $state(0);
   let total = $state(0);
   let shipping = $state(10);
@@ -17,17 +18,37 @@ function init(){
     total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
 };
 
-function packageItems(items){
-
+function packageItems(){
+  return Object.values(getLocalStorage('so-cart').reduce((obj, item) => {
+    // only add item if it does not already exist in the cart, otherwise add one to the existing quantity.
+    if (Object.keys(obj).includes(item.Id)) {
+      obj[item.Id].quantity += 1;
+    }
+    else {
+      obj[item.Id] = {
+          id: item.Id,
+          name: item.Name,
+          price: item.FinalPrice,
+          quantity: 1
+      };
+    }
+    return obj;
+  }, {}));
 }
 function handleSubmit(e){
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {}
+    formData.forEach((value,key) => data[key] = value);
+    data.items = packageItems();
+    data.orderDate = new Date();
+    checkout(data)
 }
 
 onMount(init)
 </script>
 
-<form action="" id="checkoutForm">
+<form action="" id="checkoutForm" onsubmit="{handleSubmit}">
   <fieldset>
     <legend>Shipping</legend>
     <label for="">First Name</label>

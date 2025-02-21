@@ -1,9 +1,9 @@
 <script>
-    import {getData} from '../productData.mjs';
+    import {getProductsByCategory} from '../externalServices.mjs';
   import ProductSummary from './productSummary.svelte';
 
     let {category} = $props();
-    let promise = getData(category.toLowerCase());
+    let promise = getProductsByCategory(category.toLowerCase());
 </script>
 
 <h2>Top Products: {category}</h2>
