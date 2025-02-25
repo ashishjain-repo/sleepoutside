@@ -1,6 +1,6 @@
 <script>
     import { findProductById } from '../productData.mjs';
-  import Breadcrumbs from './Breadcrumbs.svelte';
+    import Breadcrumbs from './Breadcrumbs.svelte';
     let {productId} = $props();
     const productPromise = findProductById(productId);
 
@@ -26,7 +26,9 @@
         <h3 id="productName">Loading...</h3>
     </section>
 {:then product} 
-<Breadcrumbs category={product.Category}/>
+{#if product}
+    
+    <Breadcrumbs category={product.Category}/>
     <section class='product-detail'>
 
     <h3 id="productName">{product.Name}</h3>
@@ -39,4 +41,7 @@
         <button id="addToCart" data-id="{product.id}" onclick="{() => addProductToCart(product)}">Add to Cart</button>
     </div>
     </section>
+{:else}
+    <h3 id="productName">The Product You Are Looking For Does Not Exist</h3>
+{/if}
 {/await}
