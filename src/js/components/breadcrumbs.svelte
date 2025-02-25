@@ -7,3 +7,9 @@
 {:else}
     <p>{category}</p>
 {/if}
+
+<style>
+    p {
+        text-align: left;
+    }
+</style>
