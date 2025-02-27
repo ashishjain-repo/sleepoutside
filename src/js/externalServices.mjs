@@ -6,7 +6,7 @@ function convertToJson(res) {
   }
 }
 const baseURL = import.meta.env.VITE_SERVER_URL;
-export async function getData(category) {
+export async function getProductsByCategory(category) {
   const response = await fetch(baseURL + `products/search/${category}`);
   const data = await convertToJson(response);
   return data.Result;
@@ -17,4 +17,15 @@ export async function findProductById(id) {
   const data = await convertToJson(response);
 
   return data.Result;
+}
+
+export async function checkout(order) {
+  const res = await fetch(baseURL + 'checkout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(order)
+  })
+  console.log(await res.json());
 }
