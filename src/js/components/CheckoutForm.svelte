@@ -1,6 +1,6 @@
 <script>
-  import { onMount } from 'svelte';
-  import {getLocalStorage} from '../utils.mjs';
+  import { onMount} from 'svelte';
+  import {alertMessage, getLocalStorage, setLocalStorage} from '../utils.mjs';
   import {checkout} from '../externalServices.mjs';
   let tax = $state(0);
   let total = $state(0);
@@ -35,14 +35,22 @@ function packageItems(){
     return obj;
   }, {}));
 }
-function handleSubmit(e){
+async function handleSubmit(e){
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {}
     formData.forEach((value,key) => data[key] = value);
     data.items = packageItems();
     data.orderDate = new Date();
-    checkout(data)
+    try {
+      const res = await checkout(data)
+      setLocalStorage('so-cart',[])
+      window.location.href = '/';
+    }
+    catch (error) {
+      alertMessage(error.message);
+    }
+    
 }
 
 onMount(init)
@@ -52,26 +60,26 @@ onMount(init)
   <fieldset>
     <legend>Shipping</legend>
     <label for="">First Name</label>
-    <input type="text" name="fname" />
+    <input type="text" name="fname" required/>
     <label for="">Last Name</label>
-    <input type="text" name="lname" />
+    <input type="text" name="lname" required/>
     <label for="">Street</label>
-    <input type="text" name="street" />
+    <input type="text" name="street" required/>
     <label for="">City</label>
-    <input type="text" name="city" />
+    <input type="text" name="city" required/>
     <label for="">State</label>
-    <input type="text" name="state" />
+    <input type="text" name="state" required/>
     <label for="">Zip</label>
-    <input type="text" name="zip" />
+    <input type="text" name="zip" required/>
   </fieldset>
   <fieldset>
     <legend>Payment</legend>
     <label for="">Card Number</label>
-    <input type="text" name="cardNumber" />
+    <input type="text" name="cardNumber" required placeholder="xxxx-xxxx-xxxx-xxxx" pattern={"[0-9\\s]{13,19}"}/>
     <label for="">Expiration</label>
-    <input type="text" name="expiration" />
+    <input type="text" name="expiration" required placeholder="00/00" pattern={"[0-9]{2}\/[0-9]{2}"}/>
     <label for="">Security Code</label>
-    <input type="text" name="code" />
+    <input type="text" name="code" required placeholder="000" pattern={"[0-9]{3,5}"}/>
   </fieldset>
   <fieldset class="checkout-summary">
     <legend>Order Summary</legend>
