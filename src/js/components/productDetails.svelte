@@ -1,5 +1,6 @@
 <script>
-    import { findProductById } from '../productData.mjs';
+    import { findProductById } from '../externalServices.mjs';
+    import {getLocalStorage, setLocalStorage } from "../utils.mjs";
     import Breadcrumbs from './Breadcrumbs.svelte';
     let {productId} = $props();
     const productPromise = findProductById(productId);
