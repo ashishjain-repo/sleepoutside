@@ -1,12 +1,14 @@
-import { findProductById } from './productData.mjs';
-import {getLocalStorage, setLocalStorage} from './utils.mjs';
+import { findProductById } from './externalServices.mjs';
+import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 export default async function productDetails(productId, selector) {
   const product = await findProductById(productId);
-  const html = productDetailsTemplate(product)
+  const html = productDetailsTemplate(product);
   document.querySelector(selector).innerHTML = html;
   // The Add Cart Button needs an event listener
-  document.getElementById('addToCart').addEventListener('click',() => addProductToCart(product));
+  document
+    .getElementById('addToCart')
+    .addEventListener('click', () => addProductToCart(product));
 }
 
 function productDetailsTemplate(product) {
@@ -32,5 +34,5 @@ function triggerAnimation() {
   document.querySelector('.cart').classList.toggle('activated');
   setTimeout(() => {
     document.querySelector('.cart').classList.toggle('activated');
-  },500)
+  }, 500);
 }

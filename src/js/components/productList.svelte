@@ -1,10 +1,10 @@
 <script>
-    import {getData} from '../productData.mjs';
+    import {getProductsByCategory} from '../externalServices.mjs';
     import ProductSummary from './productSummary.svelte';
     import Breadcrumbs from './Breadcrumbs.svelte';
 
     let {category} = $props();
-    let promise = getData(category.toLowerCase());
+    let promise = getProductsByCategory(category.toLowerCase());
 </script>
 
 {#await promise}
