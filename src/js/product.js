@@ -1,7 +1,11 @@
 import { getParam } from './utils.mjs';
-import productDetails from './productDetails.mjs';
 import { renderHeaderFooter } from './utils.mjs';
+import ProductDetails from './components/productDetails.svelte';
+import { mount } from 'svelte';
 
 const productId = getParam('product');
-productDetails(productId,'.product-detail')
+const productDetails = mount(ProductDetails, {
+        target: document.querySelector('.product'),
+        props: {productId}
+})
 renderHeaderFooter();
