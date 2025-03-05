@@ -1,11 +1,18 @@
 <script>
     import {getProductsByCategory} from '../externalServices.mjs';
-  import ProductSummary from './productSummary.svelte';
+    import ProductSummary from './productSummary.svelte';
+    import Breadcrumbs from './breadcrumbs.svelte';
 
     let {category} = $props();
     let promise = getProductsByCategory(category.toLowerCase());
 </script>
 
+{#await promise}
+loading...
+{:then products} 
+    <Breadcrumbs {category} count={products.length}/>
+    
+{/await}
 <h2>Top Products: {category}</h2>
 
 {#await promise}
