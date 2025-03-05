@@ -1,7 +1,7 @@
 <script>
     import {getProductsByCategory} from '../externalServices.mjs';
     import ProductSummary from './productSummary.svelte';
-    import Breadcrumbs from './Breadcrumbs.svelte';
+    import Breadcrumbs from './BreadCrumbs.svelte';
 
     let {category} = $props();
     let promise = getProductsByCategory(category.toLowerCase());
