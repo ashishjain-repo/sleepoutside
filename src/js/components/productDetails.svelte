@@ -10,7 +10,6 @@
         const products = getLocalStorage('so-cart');
         if (products) {
             const index = products.findIndex(p => p.Id == product.Id);
-            console.log(index);
             if (index == -1) {
                 setLocalStorage('so-cart', [...products, product]);
             }
