@@ -6,8 +6,18 @@
     const productPromise = findProductById(productId);
 
     function addProductToCart(product) {
+        product.quantity = 1;
         const products = getLocalStorage('so-cart');
-        if (products) setLocalStorage('so-cart', [...products, product]);
+        if (products) {
+            const index = products.findIndex(p => p.Id == product.Id);
+            if (index == -1) {
+                setLocalStorage('so-cart', [...products, product]);
+            }
+            else {
+                products[index].quantity += 1;
+                setLocalStorage('so-cart', products);
+            }
+        }
         else setLocalStorage('so-cart', [product]);
         triggerAnimation();
     }

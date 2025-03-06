@@ -11,29 +11,22 @@
 
 function init(){
     list = getLocalStorage('so-cart');
-    subtotal = list.reduce((a, b) => a + b.FinalPrice, 0).toFixed(2);
-    quantity = list.length;
+    subtotal = list.reduce((a, b) => a + (b.FinalPrice * b.quantity), 0).toFixed(2);
+    quantity = list.reduce((count, item) => count + item.quantity, 0);
     shipping += (quantity - 1) * 2;
     tax = (subtotal * 0.06).toFixed(2);
     total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
 };
 
 function packageItems(){
-  return Object.values(getLocalStorage('so-cart').reduce((obj, item) => {
-    // only add item if it does not already exist in the cart, otherwise add one to the existing quantity.
-    if (Object.keys(obj).includes(item.Id)) {
-      obj[item.Id].quantity += 1;
-    }
-    else {
-      obj[item.Id] = {
+  return getLocalStorage('so-cart').map(item => {
+    return {
           id: item.Id,
           name: item.Name,
           price: item.FinalPrice,
-          quantity: 1
-      };
-    }
-    return obj;
-  }, {}));
+          quantity: item.quantity
+      }
+    });
 }
 async function handleSubmit(e){
     e.preventDefault();

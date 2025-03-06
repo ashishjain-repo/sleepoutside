@@ -14,7 +14,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class='cart-card divider'>
   <a href='#' class='cart-card__image'>
     <img
-      src='${item.Image}'
+      src='${item.Images.PrimaryMedium}'
       alt='${item.Name}'
     />
   </a>
@@ -22,8 +22,8 @@ function cartItemTemplate(item) {
     <h2 class='card__name'>${item.Name}</h2>
   </a>
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: 1</p>
-  <p class='cart-card__price'>$${item.FinalPrice}</p>
+  <p class='cart-card__quantity'>qty: ${item.quantity}</p>
+  <p class='cart-card__price'>$${(item.FinalPrice * item.quantity).toFixed(2)}</p>
 </li>`;
   return newItem;
 }
@@ -34,7 +34,7 @@ function cartTotal() {
   const cart = document.getElementsByClassName("cart-total")[0];
   try {
     const cartItems = getLocalStorage("so-cart") || [];
-    total = cartItems.reduce((total, item) => total + item.FinalPrice, 0);
+    total = cartItems.reduce((total, item) => total + (item.FinalPrice * item.quantity), 0);
     cart.textContent = `$${total.toFixed(2)}`; // Display total in proper format
     document.getElementsByClassName("cart-footer")[0].classList.remove("hide");
   } catch (error) {
